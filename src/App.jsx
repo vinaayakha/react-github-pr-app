@@ -1,16 +1,31 @@
+import { ThemeProvider, createTheme } from "@mui/material";
+import "./App.css";
+import Routes from "./Routes";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import TopBar from "./Components/TopBar";
 
-import './App.css'
-import Routes from './Routes';
-
+const themes = createTheme();
 function App() {
-
   const pages = import.meta.globEager("./pages/**/!(*.test.[jt]sx)*.([jt]sx)");
 
+  const navigate = useNavigate();
+  const appState = useSelector((state) => state);
+  useEffect(() => {
+    // console.log({appState});
+    if(appState.token === ""){
+      navigate('/signin')
+    }
+  }, [appState])
   return (
     <>
-    <Routes pages={pages} />
+      <ThemeProvider theme={themes}>
+        {appState.token !== "" && <TopBar userData={appState.userData}/>}
+        <Routes pages={pages} />
+      </ThemeProvider>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

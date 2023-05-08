@@ -5,11 +5,16 @@ export const OnboardingSlice = createSlice({
   name: "Onboarding",
   initialState: {
     value: false,
+    token: "",
+    username: "",
+    userData: {}
   },
   reducers: {
     isOnboarded: (state, action) => {
-      console.log(action);
-      state.value = action.payload
+      state.value = action.payload.value;
+      state.token = action.payload.token;
+      state.username = action.payload.username;
+      state.userData = action.payload.userData;
     },
   },
 });
