@@ -37,3 +37,17 @@
 .read-the-docs {
   color: #888;
 }
+
+.header {
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.header > button {
+  position: absolute;
+  left: 40px;
+
+}

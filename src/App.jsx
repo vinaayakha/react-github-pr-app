@@ -1,4 +1,4 @@
-import { ThemeProvider, createTheme } from "@mui/material";
+import { Paper, ThemeProvider, createTheme } from "@mui/material";
 import "./App.css";
 import Routes from "./Routes";
 import { useEffect } from "react";
@@ -14,15 +14,21 @@ function App() {
   const appState = useSelector((state) => state);
   useEffect(() => {
     // console.log({appState});
-    if(appState.token === ""){
-      navigate('/signin')
+    if (appState.token === "") {
+      navigate("/signin");
     }
-  }, [appState])
+  }, [appState]);
   return (
     <>
       <ThemeProvider theme={themes}>
-        {appState.token !== "" && <TopBar userData={appState.userData}/>}
-        <Routes pages={pages} />
+        {appState.token !== "" && <TopBar userData={appState} />}
+        <Paper
+          style={{
+            marginTop: appState.token !== "" ? "" : "10px",
+          }}
+        >
+          <Routes pages={pages} />
+        </Paper>
       </ThemeProvider>
     </>
   );
